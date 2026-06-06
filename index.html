@@ -11,72 +11,73 @@
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
-  <div class="max-w-4xl mx-auto p-6 space-y-6">
+  <div class="max-w-4xl mx-auto p-3 sm:p-6 space-y-3 sm:space-y-4">
 
     <div class="text-center">
-      <h1 class="text-3xl font-bold text-gray-800">ABS® Incontinencia Ligera</h1>
-      <p class="text-gray-500 text-sm mt-1">Calculadora de bonificaciones</p>
+      <h1 class="text-xl sm:text-2xl font-bold text-gray-800">ABS® Incontinencia Ligera</h1>
+      <p class="text-gray-400 text-xs mt-0.5">Calculadora de bonificaciones</p>
     </div>
 
     <!-- BANNER BONIFICACIÓN -->
-    <div class="grid grid-cols-2 gap-4">
-      <div id="banner-25" class="rounded-xl p-4 text-center border-2 border-gray-200 bg-white transition-all">
-        <div class="text-4xl font-extrabold text-gray-300" id="pct-25">20%</div>
-        <div class="text-sm font-semibold text-gray-400 mt-1">con 25 uds surtidas</div>
-        <div class="text-xs text-gray-400 mt-1">+ 5 neceseres exclusivos</div>
+    <div class="grid grid-cols-2 gap-3">
+      <div id="banner-25" class="rounded-lg px-3 py-2 flex items-center justify-between border-2 border-gray-200 bg-white transition-all">
+        <div class="text-2xl font-extrabold text-gray-300 leading-none" id="pct-25">20%</div>
+        <div class="text-right">
+          <div class="text-xs font-semibold text-gray-400">25 uds surtidas</div>
+          <div class="text-xs text-gray-400">+ 5 neceseres</div>
+        </div>
       </div>
-      <div id="banner-50" class="rounded-xl p-4 text-center border-2 border-gray-200 bg-white transition-all">
-        <div class="text-4xl font-extrabold text-gray-300" id="pct-50">40%</div>
-        <div class="text-sm font-semibold text-gray-400 mt-1">con 50 uds surtidas</div>
+      <div id="banner-50" class="rounded-lg px-3 py-2 flex items-center justify-between border-2 border-gray-200 bg-white transition-all">
+        <div class="text-2xl font-extrabold text-gray-300 leading-none" id="pct-50">40%</div>
+        <div class="text-right">
+          <div class="text-xs font-semibold text-gray-400">50 uds surtidas</div>
+        </div>
       </div>
     </div>
 
     <!-- ABS LADY -->
-    <section class="bg-pink-50 border border-pink-200 rounded-xl shadow p-5">
-      <h2 class="text-xl font-bold text-pink-700 mb-4">ABS® <span class="italic">lady</span></h2>
+    <section class="bg-pink-50 border border-pink-200 rounded-xl shadow p-3">
+      <h2 class="text-base font-bold text-pink-700 mb-2">ABS® <span class="italic">lady</span></h2>
       <div id="list-lady" class="space-y-3"></div>
     </section>
 
     <!-- ABS MEN -->
-    <section class="bg-blue-950 border border-blue-800 rounded-xl shadow p-5">
-      <h2 class="text-xl font-bold text-blue-300 mb-4">ABS® <span class="italic font-extrabold">MEN</span></h2>
+    <section class="bg-blue-950 border border-blue-800 rounded-xl shadow p-3">
+      <h2 class="text-base font-bold text-blue-300 mb-2">ABS® <span class="italic font-extrabold">MEN</span></h2>
       <div id="list-men" class="space-y-3"></div>
     </section>
 
     <!-- RESUMEN -->
-    <div id="summary" class="bg-white rounded-xl shadow p-5 space-y-3 border border-gray-200">
-      <div class="flex justify-between items-center">
-        <span class="text-gray-600">Total unidades seleccionadas</span>
-        <span id="total-units" class="text-2xl font-bold text-gray-800">0</span>
+    <div id="summary" class="bg-white rounded-xl shadow p-3 space-y-2 border border-gray-200">
+      <div class="flex justify-between items-center gap-2">
+        <span class="text-sm text-gray-600">Total: <span id="total-units" class="font-bold text-gray-800">0</span> uds</span>
+        <span class="text-sm text-gray-600">Descuento: <span id="discount-pct" class="font-bold text-gray-300">—</span></span>
       </div>
-      <div class="flex justify-between items-center">
-        <span class="text-gray-600">Descuento aplicado</span>
-        <span id="discount-pct" class="text-2xl font-bold text-gray-300">—</span>
-      </div>
-      <div class="flex justify-between items-center">
-        <span class="text-gray-600">Coste sin descuento</span>
-        <span id="cost-original" class="font-semibold text-gray-500">0,00 €</span>
-      </div>
-      <div class="flex justify-between items-center">
-        <span class="text-gray-600">Ahorro total</span>
-        <span id="cost-savings" class="font-bold text-green-600">0,00 €</span>
+      <div class="flex justify-between items-center gap-2">
+        <span class="text-sm text-gray-600">Sin descuento: <span id="cost-original" class="font-semibold text-gray-500">0,00 €</span></span>
+        <span class="text-sm text-gray-600">Ahorro: <span id="cost-savings" class="text-sm font-bold text-green-600">0,00 €</span></span>
       </div>
       <div class="flex justify-between items-center border-t pt-3">
-        <span class="text-gray-700 font-semibold">Coste final (con descuento)</span>
-        <span id="cost-final" class="text-2xl font-bold text-gray-800">0,00 €</span>
+        <span class="text-sm sm:text-base text-gray-700 font-semibold">Coste final (con descuento)</span>
+        <span id="cost-final" class="text-xl sm:text-2xl font-bold text-gray-800">0,00 €</span>
       </div>
 
       <!-- DESGLOSE -->
       <div id="breakdown" class="mt-2 text-sm text-gray-600 space-y-2"></div>
     </div>
 
+    <!-- IMAGEN -->
+    <div class="mt-6">
+      <img src="img-conocenos.png" alt="ABS Incontinencia Ligera" class="mx-auto w-full max-w-md md:max-w-lg object-contain rounded-lg"/>
+    </div>
+
   </div>
 
   <script>
     const lady = [
-      { id: "lady-normal", name: "ABS® Lady Absorción Normal", units: 20, price: 3.78, group: "lady" },
-      { id: "lady-extra",  name: "ABS® Lady Absorción Extra",  units: 16, price: 4.97, group: "lady" },
-      { id: "lady-maxi",   name: "ABS® Lady Absorción Maxi",   units: 12, price: 4.86, group: "lady" },
+      { id: "lady-normal", name: "ABS® Lady Normal", units: 20, price: 3.78, group: "lady" },
+      { id: "lady-extra",  name: "ABS® Lady Extra",  units: 16, price: 4.97, group: "lady" },
+      { id: "lady-maxi",   name: "ABS® Lady Maxi",   units: 12, price: 4.86, group: "lady" },
     ];
     const men = [
       { id: "men-l2", name: "ABS® Men Level 2", units: 10, price: 3.08, group: "men" },
@@ -89,18 +90,18 @@
       const isLady = containerId === "list-lady";
       products.forEach(p => {
         const row = document.createElement("div");
-        row.className = `flex items-center gap-4 p-3 rounded-lg shadow-sm ${isLady ? "bg-white border border-pink-100" : "bg-blue-900 border border-blue-700"}`;
+        row.className = `flex items-center gap-3 p-3 rounded-lg shadow-sm ${isLady ? "bg-white border border-pink-100" : "bg-blue-900 border border-blue-700"}`;
         row.innerHTML = `
-          <label class="flex-1 ${isLady ? "text-gray-700" : "text-blue-100"}">
+          <label class="flex-1 text-sm sm:text-base ${isLady ? "text-gray-700" : "text-blue-100"}">
             ${p.name}
             <span class="block text-xs ${isLady ? "text-gray-400" : "text-blue-400"}">
-              PVL: ${p.price.toFixed(2)} € · Caja de ${p.units} uds
+              PVL: ${p.price.toFixed(2)} € · Bolsa de ${p.units} uds
             </span>
           </label>
-          <div class="flex items-center gap-2">
-            <label class="text-xs ${isLady ? "text-gray-400" : "text-blue-400"}">Cajas</label>
+          <div class="flex items-center gap-2 shrink-0">
             <input type="number" min="0" value="0" data-id="${p.id}"
-              class="qty-input w-16 text-center p-2 border rounded bg-white text-gray-800 text-sm"/>
+              class="qty-input w-16 sm:w-20 text-center p-2 border rounded bg-white text-gray-800 text-sm"/>
+            <label class="text-xs ${isLady ? "text-gray-400" : "text-blue-400"}">Bolsas</label>
           </div>
         `;
         container.appendChild(row);
@@ -133,10 +134,10 @@
         return { ...p, boxes, qty, subtotal: p.price * boxes };
       });
 
-      const totalUnits   = data.reduce((s, d) => s + d.qty, 0);
       const totalBoxes   = data.reduce((s, d) => s + d.boxes, 0);
+      const totalUnits   = data.reduce((s, d) => s + d.qty, 0);
       const costOriginal = data.reduce((s, d) => s + d.subtotal, 0);
-      const discount     = getDiscount(totalUnits);
+      const discount     = getDiscount(totalBoxes);
       const costFinal    = costOriginal * (1 - discount);
       const savings      = costOriginal - costFinal;
 
@@ -146,28 +147,28 @@
       const p25 = document.getElementById("pct-25");
       const p50 = document.getElementById("pct-50");
 
-      b25.className = `rounded-xl p-4 text-center border-2 transition-all ${discount === 0.20 ? "border-pink-400 bg-pink-50" : discount === 0.40 ? "border-green-400 bg-green-50" : "border-gray-200 bg-white"}`;
+      b25.className = `rounded-xl p-4 text-center border-2 transition-all ${discount === 0.20 ? "border-pink-400 bg-pink-50" : "border-gray-200 bg-white"}`;
       b50.className = `rounded-xl p-4 text-center border-2 transition-all ${discount === 0.40 ? "border-green-400 bg-green-50" : "border-gray-200 bg-white"}`;
 
-      p25.className = `text-4xl font-extrabold mt-1 ${totalUnits >= 25 ? "text-pink-500" : "text-gray-300"}`;
-      p50.className = `text-4xl font-extrabold mt-1 ${totalUnits >= 50 ? "text-green-600" : "text-gray-300"}`;
+      p25.className = `text-4xl font-extrabold mt-1 ${discount === 0.20 ? "text-pink-500" : "text-gray-300"}`;
+      p50.className = `text-4xl font-extrabold mt-1 ${discount === 0.40 ? "text-green-600" : "text-gray-300"}`;
 
       // Resumen
-      document.getElementById("total-units").textContent = totalUnits;
+      document.getElementById("total-units").textContent = totalBoxes;
       document.getElementById("discount-pct").textContent = discount > 0 ? `−${discount * 100}%` : "—";
-      document.getElementById("discount-pct").className = `text-2xl font-bold ${discount === 0.40 ? "text-green-600" : discount === 0.20 ? "text-pink-500" : "text-gray-300"}`;
+      document.getElementById("discount-pct").className = `font-bold ${discount > 0 ? "text-green-600" : "text-gray-300"}`;
       document.getElementById("cost-original").textContent = fmt(costOriginal);
       document.getElementById("cost-savings").textContent  = discount > 0 ? `−${fmt(savings)}` : "0,00 €";
       document.getElementById("cost-final").textContent    = fmt(costFinal);
 
       // Progreso hacia siguiente tramo
       let progressMsg = "";
-      if (totalUnits < 25) {
-        const needed = 25 - totalUnits;
-        progressMsg = `<p class="text-xs text-gray-400 text-center">Faltan <strong>${needed} uds</strong> para el descuento del 20%</p>`;
-      } else if (totalUnits < 50) {
-        const needed = 50 - totalUnits;
-        progressMsg = `<p class="text-xs text-pink-500 text-center">Faltan <strong>${needed} uds</strong> para el descuento del 40%</p>`;
+      if (totalBoxes < 25) {
+        const needed = 25 - totalBoxes;
+        progressMsg = `<p class="text-xs text-gray-400 text-center">Faltan <strong>${needed} unidades</strong> para el descuento del 20%</p>`;
+      } else if (totalBoxes < 50) {
+        const needed = 50 - totalBoxes;
+        progressMsg = `<p class="text-xs text-pink-500 text-center">Faltan <strong>${needed} unidades</strong> para el descuento del 40%</p>`;
       } else {
         progressMsg = `<p class="text-xs text-green-600 text-center font-semibold">✓ Descuento máximo del 40% aplicado</p>`;
       }
@@ -175,14 +176,20 @@
       // Desglose por referencia
       const breakdownRows = data.filter(d => d.boxes > 0).map(d => {
         const effectivePVL = d.price * (1 - discount);
+        const finalCost = d.subtotal * (1 - discount);
         return `
           <div class="p-2 border-b border-gray-100">
-            <strong>${d.name}</strong><br>
-            ${d.boxes} caja${d.boxes > 1 ? "s" : ""} × ${d.units} uds = ${d.qty} uds &nbsp;|&nbsp;
-            Subtotal: ${fmt(d.subtotal)}
-            ${discount > 0 ? `<br>
-              <span class="text-green-600">PVL efectivo: ${effectivePVL.toFixed(2)} €
-              <span class="text-gray-400 line-through ml-1">${d.price.toFixed(2)} €</span></span>` : ""}
+            <div class="flex justify-between items-center gap-2">
+              <div>
+                <strong class="text-sm">${d.name}</strong>
+                ${discount > 0 ? `
+                <div class="text-xs mt-0.5">
+                  <span class="text-green-600">PVL efectivo: ${effectivePVL.toFixed(2)} €</span>
+                  <span class="text-gray-400 line-through ml-1">${d.price.toFixed(2)} €</span>
+                </div>` : ""}
+              </div>
+              <span class="text-sm shrink-0">${d.boxes} bolsa${d.boxes > 1 ? "s" : ""} · <span class="font-semibold">${fmt(finalCost)}</span></span>
+            </div>
           </div>
         `;
       }).join("");
