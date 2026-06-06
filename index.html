@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bonificaciones Incontinencia Ligera</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .flash { animation: flashHighlight 0.4s ease-in-out; }
+    @keyframes flashHighlight { 0% { background-color: #fce7f3; } 100% { background-color: white; } }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="max-w-4xl mx-auto p-6 space-y-6">
+
+    <div class="text-center">
+      <h1 class="text-3xl font-bold text-gray-800">ABS® Incontinencia Ligera</h1>
+      <p class="text-gray-500 text-sm mt-1">Calculadora de bonificaciones</p>
+    </div>
+
+    <!-- BANNER BONIFICACIÓN -->
+    <div class="grid grid-cols-2 gap-4">
+      <div id="banner-25" class="rounded-xl p-4 text-center border-2 border-gray-200 bg-white transition-all">
+        <div class="text-4xl font-extrabold text-gray-300" id="pct-25">20%</div>
+        <div class="text-sm font-semibold text-gray-400 mt-1">con 25 uds surtidas</div>
+        <div class="text-xs text-gray-400 mt-1">+ 5 neceseres exclusivos</div>
+      </div>
+      <div id="banner-50" class="rounded-xl p-4 text-center border-2 border-gray-200 bg-white transition-all">
+        <div class="text-4xl font-extrabold text-gray-300" id="pct-50">40%</div>
+        <div class="text-sm font-semibold text-gray-400 mt-1">con 50 uds surtidas</div>
+      </div>
+    </div>
+
+    <!-- ABS LADY -->
+    <section class="bg-pink-50 border border-pink-200 rounded-xl shadow p-5">
+      <h2 class="text-xl font-bold text-pink-700 mb-4">ABS® <span class="italic">lady</span></h2>
+      <div id="list-lady" class="space-y-3"></div>
+    </section>
+
+    <!-- ABS MEN -->
+    <section class="bg-blue-950 border border-blue-800 rounded-xl shadow p-5">
+      <h2 class="text-xl font-bold text-blue-300 mb-4">ABS® <span class="italic font-extrabold">MEN</span></h2>
+      <div id="list-men" class="space-y-3"></div>
+    </section>
+
+    <!-- RESUMEN -->
+    <div id="summary" class="bg-white rounded-xl shadow p-5 space-y-3 border border-gray-200">
+      <div class="flex justify-between items-center">
+        <span class="text-gray-600">Total unidades seleccionadas</span>
+        <span id="total-units" class="text-2xl font-bold text-gray-800">0</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-gray-600">Descuento aplicado</span>
+        <span id="discount-pct" class="text-2xl font-bold text-gray-300">—</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-gray-600">Coste sin descuento</span>
+        <span id="cost-original" class="font-semibold text-gray-500">0,00 €</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-gray-600">Ahorro total</span>
+        <span id="cost-savings" class="font-bold text-green-600">0,00 €</span>
+      </div>
+      <div class="flex justify-between items-center border-t pt-3">
+        <span class="text-gray-700 font-semibold">Coste final (con descuento)</span>
+        <span id="cost-final" class="text-2xl font-bold text-gray-800">0,00 €</span>
+      </div>
+
+      <!-- DESGLOSE -->
+      <div id="breakdown" class="mt-2 text-sm text-gray-600 space-y-2"></div>
+    </div>
+
+  </div>
+
+  <script>
+    const lady = [
+      { id: "lady-normal", name: "ABS® Lady Absorción Normal", units: 20, price: 3.78, group: "lady" },
+      { id: "lady-extra",  name: "ABS® Lady Absorción Extra",  units: 16, price: 4.97, group: "lady" },
+      { id: "lady-maxi",   name: "ABS® Lady Absorción Maxi",   units: 12, price: 4.86, group: "lady" },
+    ];
+    const men = [
+      { id: "men-l2", name: "ABS® Men Level 2", units: 10, price: 3.08, group: "men" },
+      { id: "men-l3", name: "ABS® Men Level 3", units: 10, price: 4.16, group: "men" },
+    ];
+    const allProducts = [...lady, ...men];
+
+    function buildRows(products, containerId) {
+      const container = document.getElementById(containerId);
+      const isLady = containerId === "list-lady";
+      products.forEach(p => {
+        const row = document.createElement("div");
+        row.className = `flex items-center gap-4 p-3 rounded-lg shadow-sm ${isLady ? "bg-white border border-pink-100" : "bg-blue-900 border border-blue-700"}`;
+        row.innerHTML = `
+          <label class="flex-1 ${isLady ? "text-gray-700" : "text-blue-100"}">
+            ${p.name}
+            <span class="block text-xs ${isLady ? "text-gray-400" : "text-blue-400"}">
+              PVL: ${p.price.toFixed(2)} € · Caja de ${p.units} uds
+            </span>
+          </label>
+          <div class="flex items-center gap-2">
+            <label class="text-xs ${isLady ? "text-gray-400" : "text-blue-400"}">Cajas</label>
+            <input type="number" min="0" value="0" data-id="${p.id}"
+              class="qty-input w-16 text-center p-2 border rounded bg-white text-gray-800 text-sm"/>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    buildRows(lady, "list-lady");
+    buildRows(men,  "list-men");
+
+    function getDiscount(total) {
+      if (total >= 50) return 0.40;
+      if (total >= 25) return 0.20;
+      return 0;
+    }
+
+    document.addEventListener("input", e => {
+      if (e.target.classList.contains("qty-input")) {
+        e.target.classList.add("flash");
+        setTimeout(() => e.target.classList.remove("flash"), 400);
+        calc();
+      }
+    });
+
+    function calc() {
+      const inputs = document.querySelectorAll(".qty-input");
+      const data = allProducts.map(p => {
+        const input = [...inputs].find(i => i.dataset.id === p.id);
+        const boxes = parseInt(input?.value) || 0;
+        const qty   = boxes * p.units;
+        return { ...p, boxes, qty, subtotal: p.price * boxes };
+      });
+
+      const totalUnits   = data.reduce((s, d) => s + d.qty, 0);
+      const totalBoxes   = data.reduce((s, d) => s + d.boxes, 0);
+      const costOriginal = data.reduce((s, d) => s + d.subtotal, 0);
+      const discount     = getDiscount(totalUnits);
+      const costFinal    = costOriginal * (1 - discount);
+      const savings      = costOriginal - costFinal;
+
+      // Actualizar banners
+      const b25 = document.getElementById("banner-25");
+      const b50 = document.getElementById("banner-50");
+      const p25 = document.getElementById("pct-25");
+      const p50 = document.getElementById("pct-50");
+
+      b25.className = `rounded-xl p-4 text-center border-2 transition-all ${discount === 0.20 ? "border-pink-400 bg-pink-50" : discount === 0.40 ? "border-green-400 bg-green-50" : "border-gray-200 bg-white"}`;
+      b50.className = `rounded-xl p-4 text-center border-2 transition-all ${discount === 0.40 ? "border-green-400 bg-green-50" : "border-gray-200 bg-white"}`;
+
+      p25.className = `text-4xl font-extrabold mt-1 ${totalUnits >= 25 ? "text-pink-500" : "text-gray-300"}`;
+      p50.className = `text-4xl font-extrabold mt-1 ${totalUnits >= 50 ? "text-green-600" : "text-gray-300"}`;
+
+      // Resumen
+      document.getElementById("total-units").textContent = totalUnits;
+      document.getElementById("discount-pct").textContent = discount > 0 ? `−${discount * 100}%` : "—";
+      document.getElementById("discount-pct").className = `text-2xl font-bold ${discount === 0.40 ? "text-green-600" : discount === 0.20 ? "text-pink-500" : "text-gray-300"}`;
+      document.getElementById("cost-original").textContent = fmt(costOriginal);
+      document.getElementById("cost-savings").textContent  = discount > 0 ? `−${fmt(savings)}` : "0,00 €";
+      document.getElementById("cost-final").textContent    = fmt(costFinal);
+
+      // Progreso hacia siguiente tramo
+      let progressMsg = "";
+      if (totalUnits < 25) {
+        const needed = 25 - totalUnits;
+        progressMsg = `<p class="text-xs text-gray-400 text-center">Faltan <strong>${needed} uds</strong> para el descuento del 20%</p>`;
+      } else if (totalUnits < 50) {
+        const needed = 50 - totalUnits;
+        progressMsg = `<p class="text-xs text-pink-500 text-center">Faltan <strong>${needed} uds</strong> para el descuento del 40%</p>`;
+      } else {
+        progressMsg = `<p class="text-xs text-green-600 text-center font-semibold">✓ Descuento máximo del 40% aplicado</p>`;
+      }
+
+      // Desglose por referencia
+      const breakdownRows = data.filter(d => d.boxes > 0).map(d => {
+        const effectivePVL = d.price * (1 - discount);
+        return `
+          <div class="p-2 border-b border-gray-100">
+            <strong>${d.name}</strong><br>
+            ${d.boxes} caja${d.boxes > 1 ? "s" : ""} × ${d.units} uds = ${d.qty} uds &nbsp;|&nbsp;
+            Subtotal: ${fmt(d.subtotal)}
+            ${discount > 0 ? `<br>
+              <span class="text-green-600">PVL efectivo: ${effectivePVL.toFixed(2)} €
+              <span class="text-gray-400 line-through ml-1">${d.price.toFixed(2)} €</span></span>` : ""}
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("breakdown").innerHTML = (breakdownRows || "") + progressMsg;
+    }
+
+    function fmt(n) {
+      return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+    }
+  </script>
+</body>
+</html>
